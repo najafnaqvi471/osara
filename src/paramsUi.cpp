@@ -418,6 +418,12 @@ class ParamsDialog {
 				} else if (LOWORD(wParam) == ID_PARAM_FILTER && HIWORD(wParam) == EN_KILLFOCUS) {
 					dialog->onFilterChange();
 					return TRUE;
+				} else if (LOWORD(wParam) == ID_PARAM &&
+						HIWORD(wParam) == CBN_SETFOCUS) {
+					// Changing a param value might update param names; e.g. changing the
+					// band type in ReaEq.
+					dialog->updateParamList();
+					return TRUE;
 				} else if (LOWORD(wParam) == ID_PARAM_VAL_EDIT && HIWORD(wParam) ==EN_KILLFOCUS) {
 					dialog->onValueEdited();
 					return TRUE;
